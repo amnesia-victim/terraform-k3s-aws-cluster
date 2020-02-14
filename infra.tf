@@ -256,7 +256,7 @@ resource "aws_rds_cluster_instance" "k3s" {
 ### Create Public Rancher DNS
 #############################
 resource "aws_route53_record" "rancher" {
-  count    = local.install_rancher ? local.create_external_nlb : 0
+  count    = local.install_rancher ? local.create_external_nlb : 1
   zone_id  = data.aws_route53_zone.dns_zone.zone_id
   name     = "${local.name}.${local.domain}"
   type     = "CNAME"

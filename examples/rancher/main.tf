@@ -1,12 +1,12 @@
 provider "aws" {
-  region  = "us-west-2"
-  profile = "rancher-eng"
+  region  = var.aws_region
+  profile = "default"
 }
 
 provider "aws" {
   alias   = "r53"
   region  = "us-west-2"
-  profile = "rancher-eng"
+  profile = "default"
 }
 
 module "vpc" {
@@ -105,7 +105,7 @@ module "k3s_rancher" {
   private_subnets              = module.vpc.private_subnets
   public_subnets               = module.vpc.public_subnets
   ssh_keys                     = ["ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIN5O7k6gRYCU7YPkCH6dyXVW10izMAkDAQtQxNxdRE22 drpebcak"]
-  name                         = "example"
+  name                         = "k3s"
   k3s_cluster_secret           = "secretvaluechangeme"
   domain                       = "eng.rancher.space"
   aws_azs                      = ["us-west-2a", "us-west-2b", "us-west-2c"]
